@@ -122,6 +122,13 @@ app.put("/api/articles", jsonParser, function(req, res){
     }
 });
 
+// Error handling middle-ware
+
+app.use(function(err,req,res,next) {
+  console.log(err.stack);
+  res.status(500).send({"Error" : err.stack});
+});
+
 app.listen(8080, () => {
   console.log('News app listening on port 8080!')
 });
